@@ -327,7 +327,7 @@ func (a *TestAuthServer) NewTestTLSServer() (*TestTLSServer, error) {
 // NewRemoteClient creates new client to the remote server using identity
 // generated for this certificate authority
 func (a *TestAuthServer) NewRemoteClient(identity TestIdentity, addr net.Addr, pool *x509.CertPool) (*Client, error) {
-	tlsConfig := utils.TLSConfig()
+	tlsConfig := utils.TLSConfig(utils.DefaultCipherSuites())
 	cert, err := a.NewCertificate(identity)
 	if err != nil {
 		return nil, trace.Wrap(err)

@@ -550,8 +550,8 @@ func (i *Identity) HasPrincipals(additionalPrincipals []string) bool {
 
 // TLSConfig returns TLS config for mutual TLS authentication
 // can return NotFound error if there are no TLS credentials setup for identity
-func (i *Identity) TLSConfig() (*tls.Config, error) {
-	tlsConfig := utils.TLSConfig()
+func (i *Identity) TLSConfig(cipherSuites []uint16) (*tls.Config, error) {
+	tlsConfig := utils.TLSConfig(cipherSuites)
 	if !i.HasTLSConfig() {
 		return nil, trace.NotFound("no TLS credentials setup for this identity")
 	}

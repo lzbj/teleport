@@ -231,7 +231,11 @@ func ApplyFileConfig(fc *FileConfig, cfg *service.Config) error {
 	}
 	cfg.CachePolicy = *cachePolicy
 
-	// apply ciphers, kex algorithms, and mac algorithms
+	// Apply (TLS) cipher suites and (SSH) ciphers, KEX algorithms, and MAC
+	// algorithms.
+	if len(fc.CipherSuites) == 0 {
+		cfg.CipherSuites = fc.CipherSuites
+	}
 	if fc.Ciphers != nil {
 		cfg.Ciphers = fc.Ciphers
 	}
